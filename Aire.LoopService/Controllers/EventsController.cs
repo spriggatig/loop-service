@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
+using Aire.LoopService.Models;
 
 namespace Aire.LoopService.Controllers
 {
     public class EventsController : ApiController
     {
-        public IEnumerable<string> Get()
+        public IEnumerable<EventModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[] { new EventModel { event_name = "INCRESE_HIGH_RISK", event_datetime = DateTime.Now } };
         }
     }
 }

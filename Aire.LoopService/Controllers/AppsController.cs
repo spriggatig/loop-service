@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Aire.LoopService.Models;
 
 namespace Aire.LoopService.Controllers
