@@ -152,16 +152,8 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-/src/Ormsby.DirectDebit.Site/packages
-/src/Ormsby.DirectDebit.Core/packages
-/src/Ormsby.DirectDebit.Domain/packages
-/src/Ormsby.DirectDebit.Site/\.vs/config/
-/src/Ormsby.DirectDebit.Core/\.vs/config/
-/src/Ormsby.DirectDebit.Domain/\.vs/config/
-/src/Ormsby.Credit.AcceptanceTestBase/chromedriver-license.txt
-/src/Ormsby.Credit.sln.DotSettings
+
+\.vs/config/
+/Aire.LoopService.sln.DotSettings.user
 *.orig
-/src/Ormsby.DirectDebit.Site/.vs/config/applicationhost.config
-/src/Ormsby.DirectDebit.Core/packages
-/src/Ormsby.DirectDebit.Site/packages
-/src/Ormsby.DirectDebit.Provider.Ptx/packages
+/packages
