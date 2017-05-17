@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Aire.LoopService.Models
+﻿namespace Aire.LoopService.Api.Models
 {
     public class AppModel
     {

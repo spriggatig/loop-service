@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
-using Aire.LoopService.Models;
+using Aire.LoopService.Api.Models;
 
-namespace Aire.LoopService.Controllers
+namespace Aire.LoopService.Api.Controllers
 {
     public class AppsController : ApiController
     {

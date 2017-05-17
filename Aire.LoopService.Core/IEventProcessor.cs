@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Aire.LoopService.Domain;
 
-namespace Aire.LoopService.Core
+namespace Aire.LoopService
 {
     public interface IEventProcessor
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Aire.LoopService
+namespace Aire.LoopService.Api
 {
     public static class WebApiConfig
     {

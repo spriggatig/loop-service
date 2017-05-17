@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Aire.LoopService.Core;
 using Aire.LoopService.Domain;
 
 namespace Aire.LoopService.EventProcessors

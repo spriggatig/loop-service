@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Aire.LoopService.Models
+namespace Aire.LoopService.Api.Models
 {
     public class EventModel
     {

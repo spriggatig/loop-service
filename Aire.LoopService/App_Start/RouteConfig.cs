@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Aire.LoopService
+namespace Aire.LoopService.Api
 {
     public class RouteConfig
     {
