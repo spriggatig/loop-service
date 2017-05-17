@@ -1,10 +1,11 @@
 ﻿using System.Web.Http;
+using Aire.LoopService.Api.Models;
 
-namespace Aire.LoopService.Controllers
+namespace Aire.LoopService.Api.Controllers
 {
     public class AppsController : ApiController
     {
-        public void Post([FromBody]string value)
+        public void Post([FromBody]AppModel[] applications)
         {
         }
     }

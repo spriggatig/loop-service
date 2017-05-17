@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Aire.LoopService
+namespace Aire.LoopService.Api
 {
     public class FilterConfig
     {

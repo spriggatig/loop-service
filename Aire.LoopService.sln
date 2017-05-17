@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService", "Aire.LoopService\Aire.LoopService.csproj", "{80D4A1B2-832D-4BAA-823D-1556412A3514}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService.Api", "Aire.LoopService\Aire.LoopService.Api.csproj", "{80D4A1B2-832D-4BAA-823D-1556412A3514}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService", "Aire.LoopService.Core\Aire.LoopService.csproj", "{A30E2B28-8CEE-4652-936B-B38EF2085125}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{538771B4-B2D6-4D2E-96B2-49B63B8026DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService.Tests", "Aire.LoopService.Tests\Aire.LoopService.Tests.csproj", "{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService.Api.Tests", "Aire.LoopService.Api.Tests\Aire.LoopService.Api.Tests.csproj", "{DBD87532-7089-47AE-8BFF-2BC01F06BA77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +23,24 @@ Global
 		{80D4A1B2-832D-4BAA-823D-1556412A3514}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80D4A1B2-832D-4BAA-823D-1556412A3514}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80D4A1B2-832D-4BAA-823D-1556412A3514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A30E2B28-8CEE-4652-936B-B38EF2085125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A30E2B28-8CEE-4652-936B-B38EF2085125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A30E2B28-8CEE-4652-936B-B38EF2085125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A30E2B28-8CEE-4652-936B-B38EF2085125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBD87532-7089-47AE-8BFF-2BC01F06BA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD87532-7089-47AE-8BFF-2BC01F06BA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD87532-7089-47AE-8BFF-2BC01F06BA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD87532-7089-47AE-8BFF-2BC01F06BA77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72} = {538771B4-B2D6-4D2E-96B2-49B63B8026DD}
+		{DBD87532-7089-47AE-8BFF-2BC01F06BA77} = {538771B4-B2D6-4D2E-96B2-49B63B8026DD}
 	EndGlobalSection
 EndGlobal
