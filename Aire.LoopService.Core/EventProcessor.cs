@@ -1,22 +1,22 @@
 ﻿using System.Threading.Tasks;
 using Aire.LoopService.Domain;
+using Aire.LoopService.EventProcessors;
 using Aire.LoopService.Events.IncreaseHighRisk;
 
 namespace Aire.LoopService
 {
     public class EventProcessor : IEventProcessor
     {
-        private readonly ILowIncomeRiskFactor _lowIncomeRiskFactor;
+        private readonly IIncreaseHighRisk _increaseHighRisk;
 
-        public EventProcessor(ILowIncomeRiskFactor lowIncomeRiskFactor)
+        public EventProcessor(IIncreaseHighRisk increaseHighRisk)
         {
-            _lowIncomeRiskFactor = lowIncomeRiskFactor;
+            _increaseHighRisk = increaseHighRisk;
         }
 
-        public Task Process(Application application)
+        public async Task Process(Application application)
         {
-            var isHighRisk = _lowIncomeRiskFactor.IsHighRisk(application);
-            throw new System.NotImplementedException();
+            await _increaseHighRisk.Process(application);
         }
     }
 }
