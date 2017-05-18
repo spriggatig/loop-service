@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Configuration;
+using System.Linq;
 using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
@@ -24,7 +26,11 @@ namespace Aire.LoopService.Api
             container.Register(Classes.FromThisAssembly().BasedOn<IHttpController>().LifestyleTransient());
             container.Register(Component.For<IEventProcessor>().ImplementedBy<EventProcessor>());
             container.Register(Component.For<IIncreaseHighRisk>().ImplementedBy<IncreaseHighRisk>());
-            container.Register(Component.For<ILowIncomeRiskFactor>().ImplementedBy<LowIncomeRiskFactor>());
+
+            var lowIncomeThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["LowIncomeThreshold"]);
+            container.Register(Component.For<ILowIncomeRiskFactor>()
+                .DependsOn(Dependency.OnValue<int>(lowIncomeThreshold))
+                .ImplementedBy<LowIncomeRiskFactor>());
             SetupAutoMapper(container);
         }
 

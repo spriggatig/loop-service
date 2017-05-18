@@ -9,18 +9,20 @@ namespace Aire.LoopService.Tests.Events.RiskFactors
     [TestFixture]
     public class LowIncomeRiskFactorTests
     {
+        private int _lowIncomeThreshold;
         private LowIncomeRiskFactor _lowIncomeRiskFactor;
 
         [SetUp]
         public void SetUp()
         {
-            _lowIncomeRiskFactor = new LowIncomeRiskFactor();
+            _lowIncomeThreshold = 5000;
+            _lowIncomeRiskFactor = new LowIncomeRiskFactor(_lowIncomeThreshold);
         }
 
         [Test]
         public void Returns_True_WhenUnder_Threshold()
         {
-            var application = Builder<Application>.CreateNew().With(_ => _.annual_inc = 2000).Build();
+            var application = Builder<Application>.CreateNew().With(_ => _.annual_inc = _lowIncomeThreshold - 1).Build();
 
             var result = _lowIncomeRiskFactor.IsHighRisk(application);
 
@@ -30,7 +32,17 @@ namespace Aire.LoopService.Tests.Events.RiskFactors
         [Test]
         public void Returns_False_WhenOver_Threshold()
         {
-            var application = Builder<Application>.CreateNew().With(_ => _.annual_inc = 10001).Build();
+            var application = Builder<Application>.CreateNew().With(_ => _.annual_inc = _lowIncomeThreshold + 1).Build();
+
+            var result = _lowIncomeRiskFactor.IsHighRisk(application);
+
+            result.Should().BeFalse();
+        }
+
+        [Test]
+        public void Returns_False_WhenEqual_Threshold()
+        {
+            var application = Builder<Application>.CreateNew().With(_ => _.annual_inc = _lowIncomeThreshold).Build();
 
             var result = _lowIncomeRiskFactor.IsHighRisk(application);
 
