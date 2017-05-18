@@ -28,5 +28,4 @@ namespace Aire.LoopService.Events
             return _applications;
         }
     }
-
 }

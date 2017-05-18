@@ -1,17 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Aire.LoopService.Api.Controllers;
 using Aire.LoopService.Api.Models;
 using Aire.LoopService.Domain;
 using Aire.LoopService.Events;
-using AutoMapper;
-using FizzWare.NBuilder;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace Aire.LoopService.Api.Tests.ControllerTests
 {
@@ -29,6 +24,15 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         [Test]
         public async Task Returns_HighRiskEventModel()
         {
+            ApplicationsCount.Clear();
+            ApplicationsCount.Add(100);
+            HighRiskEvents.Clear();
+            for (var i = 0; i < 6; i++)
+            {
+                HighRiskEvents.Add(new Application());
+            }
+
+
             var result = _eventsController.Get();
 
             result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").Should().NotBeNull();

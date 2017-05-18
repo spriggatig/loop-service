@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Aire.LoopService.Api.Models;
 using Aire.LoopService.Domain;
+using Aire.LoopService.Events;
 using AutoMapper;
 
 namespace Aire.LoopService.Api.Controllers
@@ -19,6 +21,7 @@ namespace Aire.LoopService.Api.Controllers
 
         public async Task Post([FromBody]AppModel[] applications)
         {
+            ApplicationsCount.Add(applications.Length);
             foreach (var application in applications)
             {
                 var mappedApplication = _mapper.Map<Application>(application);
