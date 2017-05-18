@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService.Tests", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aire.LoopService.Api.Tests", "Aire.LoopService.Api.Tests\Aire.LoopService.Api.Tests.csproj", "{DBD87532-7089-47AE-8BFF-2BC01F06BA77}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testdata", "Testdata", "{7FF4D173-CBB2-4AB6-8861-6C8662B4E12D}"
+	ProjectSection(SolutionItems) = preProject
+		applications.json = applications.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +47,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C3007E0A-3ED7-4C2A-9B4C-0B2B9D3E0B72} = {538771B4-B2D6-4D2E-96B2-49B63B8026DD}
 		{DBD87532-7089-47AE-8BFF-2BC01F06BA77} = {538771B4-B2D6-4D2E-96B2-49B63B8026DD}
+		{7FF4D173-CBB2-4AB6-8861-6C8662B4E12D} = {538771B4-B2D6-4D2E-96B2-49B63B8026DD}
 	EndGlobalSection
 EndGlobal
