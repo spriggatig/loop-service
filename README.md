@@ -54,6 +54,7 @@ I made the following assumptions during the task:
 - That the api would already have an authentication system in place
 - That there would be a data store for the HighRisk applications, or a way to mark an application as High Risk 
 - That LowIncome could be a simple check on the reported income field, where in actual fact it would probably be a more complex calculation based on multiple fields on the application, and may involve and looking up futher data to compare to.
+- Validation - I made the assumption that the data being passed was valid (example, all applications has the correct properties). I would return 400 BadRequest if it has not been valid.
 
 ### Dev process
 
