@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testdata", "Testdata", "{7FF4D173-CBB2-4AB6-8861-6C8662B4E12D}"
 	ProjectSection(SolutionItems) = preProject
 		applications.json = applications.json
+		HighRiskApplications.json = HighRiskApplications.json
 		LowRiskApplications.json = LowRiskApplications.json
 	EndProjectSection
 EndProject
