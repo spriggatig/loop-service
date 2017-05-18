@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Aire.LoopService.Domain;
 using Aire.LoopService.EventProcessors;
-using Aire.LoopService.Events.IncreaseHighRisk;
 
 namespace Aire.LoopService
 {

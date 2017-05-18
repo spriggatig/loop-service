@@ -1,6 +1,6 @@
 ﻿using Aire.LoopService.Domain;
 
-namespace Aire.LoopService.Events.IncreaseHighRisk
+namespace Aire.LoopService.Events.RiskFactors
 {
     public interface ILowIncomeRiskFactor
     {

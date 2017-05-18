@@ -2,7 +2,8 @@
 using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
-using Aire.LoopService.Events.IncreaseHighRisk;
+using Aire.LoopService.EventProcessors;
+using Aire.LoopService.Events.RiskFactors;
 using AutoMapper;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -22,6 +23,7 @@ namespace Aire.LoopService.Api
             container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
             container.Register(Classes.FromThisAssembly().BasedOn<IHttpController>().LifestyleTransient());
             container.Register(Component.For<IEventProcessor>().ImplementedBy<EventProcessor>());
+            container.Register(Component.For<IIncreaseHighRisk>().ImplementedBy<IncreaseHighRisk>());
             container.Register(Component.For<ILowIncomeRiskFactor>().ImplementedBy<LowIncomeRiskFactor>());
             SetupAutoMapper(container);
         }

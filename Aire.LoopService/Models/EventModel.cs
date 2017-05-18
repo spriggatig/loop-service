@@ -6,6 +6,8 @@ namespace Aire.LoopService.Api.Models
     {
         public string event_name { get; set; }
 
+        public int count { get; set; }
+
         public DateTime event_datetime { get; set; }
     }
 }

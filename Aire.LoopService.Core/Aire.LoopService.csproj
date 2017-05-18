@@ -44,8 +44,9 @@
     <Compile Include="EventProcessor.cs" />
     <Compile Include="EventProcessors\IIncreaseHighRisk.cs" />
     <Compile Include="EventProcessors\IncreaseHighRisk.cs" />
-    <Compile Include="Events\IncreaseHighRisk\ILowIncomeRiskFactor.cs" />
-    <Compile Include="Events\IncreaseHighRisk\LowIncomeRiskFactor.cs" />
+    <Compile Include="Events\HighRiskEvents.cs" />
+    <Compile Include="Events\RiskFactors\ILowIncomeRiskFactor.cs" />
+    <Compile Include="Events\RiskFactors\LowIncomeRiskFactor.cs" />
     <Compile Include="IEventProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

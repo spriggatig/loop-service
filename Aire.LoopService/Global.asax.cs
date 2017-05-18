@@ -2,6 +2,7 @@
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Aire.LoopService.Events;
 using Castle.Windsor;
 
 namespace Aire.LoopService.Api
