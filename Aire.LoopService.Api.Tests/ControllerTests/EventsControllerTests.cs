@@ -22,7 +22,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         }
 
         [Test]
-        public async Task Returns_HighRiskEventModel()
+        public async Task Returns_HighRiskEvent()
         {
             ApplicationsCount.Clear();
             ApplicationsCount.Add(100);
@@ -39,6 +39,22 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         }
 
         [Test]
+        public async Task DoesNot_Return_HighRiskEvent()
+        {
+            ApplicationsCount.Clear();
+            ApplicationsCount.Add(50);
+            HighRiskEvents.Clear();
+            for (var i = 0; i < 2; i++)
+            {
+                HighRiskEvents.Add(new Application());
+            }
+
+            var result = _eventsController.Get();
+
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").Should().BeNull();
+        }
+
+        [Test]
         public async Task Returns_HighRiskEventModel_With_CorrectCount()
         {
             const int applicationsCount = 10;
@@ -52,5 +68,6 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").count.Should().Be(applicationsCount);
         }
+
     }
 }
