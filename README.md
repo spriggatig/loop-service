@@ -8,6 +8,7 @@ Issues
 Improvements
 
 - Pass all the applications and select from them which are considered High Risk, then add that collection to the HighRisk collection. Rather than one app at a time.
+- Build out the LowIncome logic and implement the storing of high risk applications
 - Build out the Events api to retrieve the number of high risk applications within a given time period and compare to the threshold for the given time period and then return a Increase High Risk Event if over
 
 Assumptions
