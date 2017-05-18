@@ -14,12 +14,17 @@ namespace Aire.LoopService.Api.Controllers
 
             var totalApplicationsCount = ApplicationsCount.Get();
             var highriskApplications = HighRiskEvents.Get();
+            var highriskApplicationsCount = highriskApplications.Count;
             var threshold = 4; // 4% threshold, todo: make this configurable
-            var percentHighRisk = (int)Math.Round((double)(100 * highriskApplications.Count) / totalApplicationsCount);
-
-            if (percentHighRisk > threshold)
+            if (totalApplicationsCount > 0 && highriskApplicationsCount > 0)
             {
-                events.Add(new EventModel { event_name = "INCRESE_HIGH_RISK", count = highriskApplications.Count, event_datetime = DateTime.Now });
+                var percentHighRisk = (int)Math.Round((double)(100 * highriskApplicationsCount) / totalApplicationsCount);
+
+                if (percentHighRisk > threshold)
+                {
+                    var eventDescription = $"Total application count: {totalApplicationsCount}, high risk application count {highriskApplications.Count}, {percentHighRisk}% of {threshold}% threshold";
+                    events.Add(new EventModel { event_name = "INCRESE_HIGH_RISK", event_description = eventDescription, event_datetime = DateTime.Now });
+                }
             }
 
             return events.ToArray();

@@ -55,8 +55,10 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         }
 
         [Test]
-        public async Task Returns_HighRiskEventModel_With_CorrectCount()
+        public async Task Returns_HighRiskEventModel_With_CorrectDescription()
         {
+            ApplicationsCount.Clear();
+            ApplicationsCount.Add(50);
             const int applicationsCount = 10;
             HighRiskEvents.Clear();
             for (var i = 0; i < applicationsCount; i++)
@@ -66,7 +68,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").count.Should().Be(applicationsCount);
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
         }
 
     }
