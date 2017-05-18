@@ -34,9 +34,10 @@ Designing the service
 
 The reason for this design is so that each part is repsonsible for a single thing, this ensures that it easier to unit test and it makes it re-usable (other parts may need to know if an application is LowIncome for a difference Event)
 Responsibilities
-AppsController - responsible for passing the mapped application to the EventProcessor
-EventProcessor - responsible for calling the events processors (currently only IncreaseHighRisk implemented, but could add in more)
-IncreaseHighRisk - responsible for calling the all risk factors that are required to determine if an application is HighRisk (currently only LowIncomeRiskFactor implemented, but could add in more, i.e. JobTitle)
-LowIncomeRiskFactor - responsible for determining whether or not an application is considered low income.
+
+- AppsController - responsible for passing the mapped application to the EventProcessor
+- EventProcessor - responsible for calling the events processors (currently only IncreaseHighRisk implemented, but could add in more)
+- IncreaseHighRisk - responsible for calling the all risk factors that are required to determine if an application is HighRisk (currently only LowIncomeRiskFactor implemented, but could add in more, i.e. JobTitle)
+- LowIncomeRiskFactor - responsible for determining whether or not an application is considered low income.
 
 ![alt text](https://github.com/spriggatig/loop-service/raw/master/sequennceone.PNG "sequence diagram")
