@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Aire.LoopService.Domain;
 using Aire.LoopService.Events;
 using Aire.LoopService.Events.RiskFactors;
@@ -18,7 +17,6 @@ namespace Aire.LoopService.EventProcessors
         public Task Process(Application application)
         {
             var isLowIncomeHighRisk = _lowIncomeRiskFactor.IsHighRisk(application);
-            //// if isLowIncomeHighRisk is true then add to list of high risk applications
             if (isLowIncomeHighRisk)
             {
                 HighRiskEvents.Add(application);

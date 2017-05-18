@@ -18,6 +18,11 @@ namespace Aire.LoopService.Events
             _applications.Add(value);
         }
 
+        public static void Clear()
+        {
+            _applications = new List<Application>();
+        }
+
         public static List<Application> Get()
         {
             return _applications;
