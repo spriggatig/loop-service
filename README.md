@@ -3,6 +3,7 @@ Aire Loop Service homework
 
 Issues
 - Within the given time period I spent a lot of time setting up the initial project, then dependency injection and mapping
+- I am not going to get it completed within the timescale of 6 hours, having already spent that amount of time (1hr planning Tuesday, 2.5hrs Tuesday evening, 3hrs Wednesday evening, 1hr this morning)
 
 Improvements
 
