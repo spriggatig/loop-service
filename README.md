@@ -28,7 +28,7 @@ Then I posted the HighRiskApplications json and checked the events api. There sh
 ```
 [
   {
-    "event_name": "INCRESE_HIGH_RISK",
+    "event_name": "INCREASE_HIGH_RISK",
     "event_description": "Total application count: 74, high risk application count 37, 50% of 4% threshold",
     "event_datetime": "2017-05-18T15:23:24.5795759+01:00"
   }

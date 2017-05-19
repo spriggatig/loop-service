@@ -35,7 +35,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").Should().NotBeNull();
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").Should().NotBeNull();
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").Should().BeNull();
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").Should().BeNull();
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCRESE_HIGH_RISK").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
         }
 
     }

@@ -23,7 +23,7 @@ namespace Aire.LoopService.Api.Controllers
                 if (percentHighRisk > threshold)
                 {
                     var eventDescription = $"Total application count: {totalApplicationsCount}, high risk application count {highriskApplications.Count}, {percentHighRisk}% of {threshold}% threshold";
-                    events.Add(new EventModel { event_name = "INCRESE_HIGH_RISK", event_description = eventDescription, event_datetime = DateTime.Now });
+                    events.Add(new EventModel { event_name = "INCREASE_HIGH_RISK", event_description = eventDescription, event_datetime = DateTime.Now });
                 }
             }
 
