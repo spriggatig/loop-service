@@ -54,7 +54,7 @@ I made the following assumptions during the task:
 - That the api would already have an authentication system in place
 - That there would be a data store for the HighRisk applications, or a way to mark an application as High Risk 
 - That LowIncome could be a simple check on the reported income field, where in actual fact it would probably be a more complex calculation based on multiple fields on the application, and may involve and looking up futher data to compare to.
-- Validation - I made the assumption that the data being passed was valid (example, all applications has the correct properties). I would return 400 BadRequest if it has not been valid.
+- Validation - I made the assumption that the data being passed was valid (example, all applications has the correct properties). I would return 400 BadRequest if it had not been valid.
 
 ### Dev process
 
@@ -71,7 +71,8 @@ I made the following assumptions during the task:
   - LowIncomeRiskFactor, calculate whether the application is high risk based on its logic
   - Logic for LowIncomeRiskFactor, if application Income is below configurable threshold then it is considered LowIncome and therefore return true for IsHighRisk.
 
-The reason for this design is so that each part is repsonsible for a single thing, this ensures that it easier to unit test and it makes it re-usable (other parts may need to know if an application is LowIncome for a difference Event)
+The reason for this design is so that each part is repsonsible for a single thing, this ensures that it easier to unit test and it makes it re-usable (other parts may need to know if an application is LowIncome for a different Event)
+
 Responsibilities
 
 - AppsController - responsible for passing the mapped application to the EventProcessor
