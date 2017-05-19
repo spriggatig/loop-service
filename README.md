@@ -54,6 +54,7 @@ There are two test projects:
 - Build out the LowIncome logic so it is based on more values, rather than the one.
 - Build out the Events api to retrieve the number of high risk applications within a given time period and compare to the threshold for the given time period and then return a Increase High Risk Event if over
 - Make the threshold of high risk applications percentage configurable. It is set to 4% in the Events Api. If more than 4% of total applications are high risk then it returns a INCRESE_HIGH_RISK event. 
+- Addition of integration tests that call the API and check the results
 
 ### Assumptions
 
