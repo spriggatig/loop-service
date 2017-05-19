@@ -34,6 +34,14 @@ Then I posted the HighRiskApplications json and checked the events api. There sh
   }
 ]
 ```
+### How to run unit tests
+
+In Visual Studio, right click on the Test project and select run unit tests.
+
+There are two test projects:
+
+- Aire.LoopService.Api.Tests - tests the api controller methods
+- Aire.LoopService.Tests - tests the logic in the service
 
 ### Issues
 - Within the given time period I spent a lot of time setting up the initial project, then dependency injection and mapping
