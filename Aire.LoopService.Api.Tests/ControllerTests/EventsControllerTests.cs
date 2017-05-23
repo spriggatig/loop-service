@@ -24,8 +24,12 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         [Test]
         public async Task Returns_HighRiskEvent()
         {
-            ApplicationsCount.Clear();
-            ApplicationsCount.Add(100);
+            ApplicationHistory.Clear();
+            for (var i = 0; i < 101; i++)
+            {
+                ApplicationHistory.Add(new Application());
+            }
+
             HighRiskEvents.Clear();
             for (var i = 0; i < 6; i++)
             {
@@ -40,8 +44,11 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         [Test]
         public async Task DoesNot_Return_HighRiskEvent()
         {
-            ApplicationsCount.Clear();
-            ApplicationsCount.Add(50);
+            ApplicationHistory.Clear();
+            for (var i = 0; i < 50; i++)
+            {
+                ApplicationHistory.Add(new Application());
+            }
             HighRiskEvents.Clear();
             for (var i = 0; i < 2; i++)
             {
@@ -56,8 +63,11 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         [Test]
         public async Task Returns_HighRiskEventModel_With_CorrectDescription()
         {
-            ApplicationsCount.Clear();
-            ApplicationsCount.Add(50);
+            ApplicationHistory.Clear();
+            for (var i = 0; i < 50; i++)
+            {
+                ApplicationHistory.Add(new Application());
+            }
             const int applicationsCount = 10;
             HighRiskEvents.Clear();
             for (var i = 0; i < applicationsCount; i++)

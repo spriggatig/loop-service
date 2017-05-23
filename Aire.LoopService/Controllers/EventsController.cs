@@ -12,7 +12,7 @@ namespace Aire.LoopService.Api.Controllers
         {
             var events = new List<EventModel>();
 
-            var totalApplicationsCount = ApplicationsCount.Get();
+            var totalApplicationsCount = ApplicationHistory.Get().Count;
             var highriskApplications = HighRiskEvents.Get();
             var highriskApplicationsCount = highriskApplications.Count;
             var threshold = 4; // 4% threshold, todo: make this configurable

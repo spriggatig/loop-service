@@ -20,11 +20,11 @@ namespace Aire.LoopService.Api.Controllers
         }
 
         public async Task Post([FromBody]AppModel[] applications)
-        {
-            ApplicationsCount.Add(applications.Length);
+        {   
             foreach (var application in applications)
             {
                 var mappedApplication = _mapper.Map<Application>(application);
+                ApplicationHistory.Add(mappedApplication);
                 await _eventProcessor.Process(mappedApplication);
             }
         }
