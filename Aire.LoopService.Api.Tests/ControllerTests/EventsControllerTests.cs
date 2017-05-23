@@ -16,13 +16,15 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
     public class EventsControllerTests
     {
         private Mock<IClock> _mockClock;
+        private Mock<IThresholdProvider> _mockThresholdProvider;
         private EventsController _eventsController;
 
         [SetUp]
         public void SetUp()
         {
             _mockClock = new Mock<IClock>();
-            _eventsController = new EventsController(_mockClock.Object);
+            _mockThresholdProvider = new Mock<IThresholdProvider>();
+            _eventsController = new EventsController(_mockClock.Object, _mockThresholdProvider.Object);
         }
 
         [Test]
@@ -61,6 +63,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
                 HighRiskEvents.Add(new Application());
             }
 
+            _mockThresholdProvider.Setup(_ => _.GetThreshold(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(4);
             _mockClock.Setup(_ => _.Now).Returns(new DateTime(2017, 01, 01));
 
             var result = _eventsController.Get();
@@ -83,6 +86,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
                 HighRiskEvents.Add(new Application());
             }
 
+            _mockThresholdProvider.Setup(_ => _.GetThreshold(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(4);
             _mockClock.Setup(_ => _.Now).Returns(new DateTime(2017, 01, 01));
 
             var result = _eventsController.Get();
@@ -93,6 +97,15 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         [Test]
         public async Task Passes_CorrectDateRange_ToThresholdProvider()
         {
+            var startDate = new DateTime(2017, 05, 01);
+            var endDate = new DateTime(2017, 05, 02);
+
+            _mockClock.Setup(_ => _.Now).Returns(endDate);
+            _mockThresholdProvider.Setup(_ => _.GetThreshold(startDate, endDate)).Returns(4).Verifiable();
+
+            var result = _eventsController.Get();
+
+            _mockThresholdProvider.Verify();
         }
     }
 }

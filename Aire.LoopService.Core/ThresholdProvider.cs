@@ -10,7 +10,7 @@ namespace Aire.LoopService
     {
         public int GetThreshold(DateTime startEnd, DateTime endDate)
         {
-            throw new NotImplementedException();
+            return 4;
         }
     }
 }
