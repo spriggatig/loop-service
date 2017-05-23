@@ -110,7 +110,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         }
 
         [Test]
-        public async Task Counts_Applications_Within_Window()
+        public async Task Counts_Applications_Within__1Day_Window()
         {
             var startDate = new DateTime(2017, 05, 01);
             var endDate = new DateTime(2017, 05, 02);
@@ -146,6 +146,45 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
             var result = _eventsController.Get();
 
             result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").event_description.Should().Be("Total application count: 100, high risk application count 10, 10% of 4% threshold");
+        }
+
+        [Test]
+        public async Task Counts_Applications_Within__1Hour_Window()
+        {
+            var startDate = new DateTime(2017, 05, 02, 13, 15, 0);
+            var endDate = new DateTime(2017, 05, 02, 14, 15, 0);
+            _mockClock.Setup(_ => _.Now).Returns(endDate);
+            _mockThresholdProvider.Setup(_ => _.GetThreshold(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(4);
+
+            var windowApps = Builder<Application>.CreateListOfSize(50).All().With(_ => _.timestamp = endDate.AddMinutes(-5)).Build();
+            var outWindowApps = Builder<Application>.CreateListOfSize(5).All().With(_ => _.timestamp = endDate.AddMinutes(-65)).Build();
+
+            foreach (var windowApp in windowApps)
+            {
+                ApplicationHistory.Add(windowApp);
+            }
+
+            foreach (var outWindowApp in outWindowApps)
+            {
+                ApplicationHistory.Add(outWindowApp);
+            }
+
+            var windowHighRiskApps = Builder<Application>.CreateListOfSize(10).All().With(_ => _.timestamp = endDate.AddMinutes(-5)).Build();
+            var outWindowHighRiskApps = Builder<Application>.CreateListOfSize(5).All().With(_ => _.timestamp = endDate.AddMinutes(-80)).Build();
+
+            foreach (var windowApp in windowHighRiskApps)
+            {
+                HighRiskEvents.Add(windowApp);
+            }
+
+            foreach (var outWindowApp in outWindowHighRiskApps)
+            {
+                HighRiskEvents.Add(outWindowApp);
+            }
+
+            var result = _eventsController.Get();
+
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK_1HR").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
         }
     }
 }

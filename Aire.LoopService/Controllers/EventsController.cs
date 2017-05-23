@@ -24,8 +24,25 @@ namespace Aire.LoopService.Api.Controllers
             var startDate = _clock.Now.AddDays(-1);
             var endDate = _clock.Now;
 
-            var threshold = _thresholderProvider.GetThreshold(startDate, endDate);
+            var previousDayEvent = CheckEvent(startDate, endDate, "INCREASE_HIGH_RISK");
+            if (previousDayEvent != null)
+            {
+                events.Add(previousDayEvent);
+            }
 
+            startDate = _clock.Now.AddHours(-1);
+            var previousHourEvent = CheckEvent(startDate, endDate, "INCREASE_HIGH_RISK_1HR");
+            if (previousHourEvent != null)
+            {
+                events.Add(previousHourEvent);
+            }
+
+            return events.ToArray();
+        }
+
+        private EventModel CheckEvent(DateTime startDate, DateTime endDate, string eventName)
+        {
+            var threshold = _thresholderProvider.GetThreshold(startDate, endDate);
             var applications = ApplicationHistory.Get();
             var highriskApplications = HighRiskEvents.Get();
 
@@ -42,11 +59,11 @@ namespace Aire.LoopService.Api.Controllers
                 if (percentHighRisk > threshold)
                 {
                     var eventDescription = $"Total application count: {applicationsInWindowCount}, high risk application count {highRiskApplicationsInWindowCount}, {percentHighRisk}% of {threshold}% threshold";
-                    events.Add(new EventModel { event_name = "INCREASE_HIGH_RISK", event_description = eventDescription, event_datetime = endDate });
+                    return new EventModel { event_name = eventName, event_description = eventDescription, event_datetime = endDate };
                 }
             }
 
-            return events.ToArray();
+            return null;
         }
     }
 }
