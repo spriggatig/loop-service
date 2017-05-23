@@ -48,7 +48,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").Should().NotBeNull();
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK_24HR").Should().NotBeNull();
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").Should().BeNull();
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK_24HR").Should().BeNull();
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK_24HR").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
         }
 
         [Test]
@@ -145,7 +145,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
 
             var result = _eventsController.Get();
 
-            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").event_description.Should().Be("Total application count: 100, high risk application count 10, 10% of 4% threshold");
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK_24HR").event_description.Should().Be("Total application count: 100, high risk application count 10, 10% of 4% threshold");
         }
 
         [Test]
@@ -185,6 +185,60 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
             var result = _eventsController.Get();
 
             result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK_1HR").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
+        }
+
+        [Test]
+        public async Task Returns_LowVolumeEvent_Within__1Day_Window()
+        {
+            var startDate = new DateTime(2017, 05, 01);
+            var endDate = new DateTime(2017, 05, 02);
+            _mockClock.Setup(_ => _.Now).Returns(endDate);
+            _mockThresholdProvider.Setup(_ => _.GetThreshold(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(4);
+
+            var windowApps = Builder<Application>.CreateListOfSize(9).All().With(_ => _.timestamp = endDate.AddHours(-5)).Build();
+            var outWindowApps = Builder<Application>.CreateListOfSize(50).All().With(_ => _.timestamp = endDate.AddDays(-3)).Build();
+
+            foreach (var windowApp in windowApps)
+            {
+                ApplicationHistory.Add(windowApp);
+            }
+
+            foreach (var outWindowApp in outWindowApps)
+            {
+                ApplicationHistory.Add(outWindowApp);
+            }
+
+
+            var result = _eventsController.Get();
+
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "LOW_VOLUME").event_description.Should().Be("Low volume count: 9 20 expected volume");
+        }
+
+        [Test]
+        public async Task DoesNot_Return_LowVolumeEvent_Within__1Day_Window()
+        {
+            var startDate = new DateTime(2017, 05, 01);
+            var endDate = new DateTime(2017, 05, 02);
+            _mockClock.Setup(_ => _.Now).Returns(endDate);
+            _mockThresholdProvider.Setup(_ => _.GetThreshold(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(4);
+
+            var windowApps = Builder<Application>.CreateListOfSize(56).All().With(_ => _.timestamp = endDate.AddHours(-5)).Build();
+            var outWindowApps = Builder<Application>.CreateListOfSize(50).All().With(_ => _.timestamp = endDate.AddDays(-3)).Build();
+
+            foreach (var windowApp in windowApps)
+            {
+                ApplicationHistory.Add(windowApp);
+            }
+
+            foreach (var outWindowApp in outWindowApps)
+            {
+                ApplicationHistory.Add(outWindowApp);
+            }
+
+
+            var result = _eventsController.Get();
+
+            result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "LOW_VOLUME").Should().BeNull();
         }
     }
 }

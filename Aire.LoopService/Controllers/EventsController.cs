@@ -24,10 +24,16 @@ namespace Aire.LoopService.Api.Controllers
             var startDate = _clock.Now.AddDays(-1);
             var endDate = _clock.Now;
 
-            var previousDayEvent = CheckEvent(startDate, endDate, "INCREASE_HIGH_RISK");
+            var previousDayEvent = CheckEvent(startDate, endDate, "INCREASE_HIGH_RISK_24HR");
             if (previousDayEvent != null)
             {
                 events.Add(previousDayEvent);
+            }
+
+            var lowVolumeCheck = CheckVolume(startDate, endDate, 20);
+            if (lowVolumeCheck != null)
+            {
+                events.Add(lowVolumeCheck);
             }
 
             startDate = _clock.Now.AddHours(-1);
@@ -61,6 +67,19 @@ namespace Aire.LoopService.Api.Controllers
                     var eventDescription = $"Total application count: {applicationsInWindowCount}, high risk application count {highRiskApplicationsInWindowCount}, {percentHighRisk}% of {threshold}% threshold";
                     return new EventModel { event_name = eventName, event_description = eventDescription, event_datetime = endDate };
                 }
+            }
+
+            return null;
+        }
+
+        private EventModel CheckVolume(DateTime startDate, DateTime endDate, int expectedVolumne) {
+            var applications = ApplicationHistory.Get();
+            var applicationsInWindow = applications.Where(_ => _.timestamp > startDate && _.timestamp < endDate);
+            var applicationsInWindowCount = applicationsInWindow.Count();
+            if (applicationsInWindowCount < expectedVolumne)
+            {
+                var eventDescription = $"Low volume count: {applicationsInWindowCount} {expectedVolumne} expected volume";
+                return new EventModel { event_name = "LOW_VOLUME", event_description = eventDescription, event_datetime = endDate };
             }
 
             return null;
