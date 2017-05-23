@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationHistory.cs" />
     <Compile Include="Domain\Application.cs" />
     <Compile Include="EventProcessor.cs" />
     <Compile Include="EventProcessors\IIncreaseHighRisk.cs" />

@@ -32,7 +32,6 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
                 HighRiskEvents.Add(new Application());
             }
 
-
             var result = _eventsController.Get();
 
             result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").Should().NotBeNull();

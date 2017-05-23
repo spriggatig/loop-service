@@ -7,6 +7,7 @@ using AutoMapper;
 using FizzWare.NBuilder;
 using Moq;
 using NUnit.Framework;
+using System;
 
 namespace Aire.LoopService.Api.Tests.ControllerTests
 {
