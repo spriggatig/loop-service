@@ -25,7 +25,7 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
         public async Task Returns_HighRiskEvent()
         {
             ApplicationHistory.Clear();
-            for (var i = 0; i < 101; i++)
+            for (var i = 0; i < 100; i++)
             {
                 ApplicationHistory.Add(new Application());
             }
