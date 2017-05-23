@@ -26,6 +26,7 @@ namespace Aire.LoopService.Api
             container.Register(Classes.FromThisAssembly().BasedOn<IHttpController>().LifestyleTransient());
             container.Register(Component.For<IEventProcessor>().ImplementedBy<EventProcessor>());
             container.Register(Component.For<IIncreaseHighRisk>().ImplementedBy<IncreaseHighRisk>());
+            container.Register(Component.For<IClock>().ImplementedBy<SystemClock>());
 
             var lowIncomeThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["LowIncomeThreshold"]);
             container.Register(Component.For<ILowIncomeRiskFactor>()

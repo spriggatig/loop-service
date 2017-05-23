@@ -7,18 +7,22 @@ using Aire.LoopService.Domain;
 using Aire.LoopService.Events;
 using FluentAssertions;
 using NUnit.Framework;
+using Moq;
+using System;
 
 namespace Aire.LoopService.Api.Tests.ControllerTests
 {
     [TestFixture]
     public class EventsControllerTests
     {
+        private Mock<IClock> _mockClock;
         private EventsController _eventsController;
 
         [SetUp]
         public void SetUp()
         {
-            _eventsController = new EventsController();
+            _mockClock = new Mock<IClock>();
+            _eventsController = new EventsController(_mockClock.Object);
         }
 
         [Test]
@@ -35,6 +39,8 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
             {
                 HighRiskEvents.Add(new Application());
             }
+
+            _mockClock.Setup(_ => _.Now).Returns(new DateTime(2017, 01, 01));
 
             var result = _eventsController.Get();
 
@@ -54,6 +60,8 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
             {
                 HighRiskEvents.Add(new Application());
             }
+
+            _mockClock.Setup(_ => _.Now).Returns(new DateTime(2017, 01, 01));
 
             var result = _eventsController.Get();
 
@@ -75,10 +83,16 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
                 HighRiskEvents.Add(new Application());
             }
 
+            _mockClock.Setup(_ => _.Now).Returns(new DateTime(2017, 01, 01));
+
             var result = _eventsController.Get();
 
             result.As<IEnumerable<EventModel>>().FirstOrDefault(_ => _.event_name == "INCREASE_HIGH_RISK").event_description.Should().Be("Total application count: 50, high risk application count 10, 20% of 4% threshold");
         }
 
+        [Test]
+        public async Task Passes_CorrectDateRange_ToThresholdProvider()
+        {
+        }
     }
 }
