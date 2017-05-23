@@ -83,5 +83,6 @@
         public int collections_12_mths_ex_med { get; set; }
         public int chargeoff_within_12_mths { get; set; }
         public int num_rev_tl_bal_gt_0 { get; set; }
+        public System.DateTime timestamp { get; set; }
     }
 }

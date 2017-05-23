@@ -6,7 +6,9 @@ using Aire.LoopService.Domain;
 using AutoMapper;
 using FizzWare.NBuilder;
 using Moq;
+using FluentAssertions;
 using NUnit.Framework;
+using System;
 
 namespace Aire.LoopService.Api.Tests.ControllerTests
 {
@@ -33,6 +35,17 @@ namespace Aire.LoopService.Api.Tests.ControllerTests
             await _appsController.Post(modelApps.ToArray());
 
             _mockMapper.Verify(_ => _.Map<Application>(It.IsAny<AppModel>()), Times.Exactly(5));
+        }
+
+        [Test]
+        public async Task Adds_MappedApplication_To_ApplicationHistory()
+        {
+            ApplicationHistory.Clear();
+            var modelApps = Builder<AppModel>.CreateListOfSize(10).Build();
+
+            await _appsController.Post(modelApps.ToArray());
+
+            ApplicationHistory.Get().Count().Should().Be(10);
         }
     }
 }

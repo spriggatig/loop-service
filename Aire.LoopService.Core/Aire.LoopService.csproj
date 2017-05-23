@@ -40,16 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationHistory.cs" />
     <Compile Include="Domain\Application.cs" />
     <Compile Include="EventProcessor.cs" />
     <Compile Include="EventProcessors\IIncreaseHighRisk.cs" />
     <Compile Include="EventProcessors\IncreaseHighRisk.cs" />
-    <Compile Include="Events\ApplicationsCount.cs" />
     <Compile Include="Events\HighRiskEvents.cs" />
     <Compile Include="Events\RiskFactors\ILowIncomeRiskFactor.cs" />
     <Compile Include="Events\RiskFactors\LowIncomeRiskFactor.cs" />
+    <Compile Include="IClock.cs" />
     <Compile Include="IEventProcessor.cs" />
+    <Compile Include="IThresholdProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemClock.cs" />
+    <Compile Include="ThresholdProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
