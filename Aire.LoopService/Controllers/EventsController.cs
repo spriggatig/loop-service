@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 using Aire.LoopService.Api.Models;
@@ -26,18 +27,22 @@ namespace Aire.LoopService.Api.Controllers
             var threshold = _thresholderProvider.GetThreshold(startDate, endDate);
 
             var applications = ApplicationHistory.Get();
-            var applicationsCount = applications.Count;
             var highriskApplications = HighRiskEvents.Get();
-            var highriskApplicationsCount = highriskApplications.Count;
 
-            if (applicationsCount > 0 && highriskApplicationsCount > 0)
+            var applicationsInWindow = applications.Where(_ => _.timestamp > startDate && _.timestamp < endDate);
+            var highRiskApplicationsInWindow = highriskApplications.Where(_ => _.timestamp > startDate && _.timestamp < endDate);
+
+            var applicationsInWindowCount = applicationsInWindow.Count();
+            var highRiskApplicationsInWindowCount = highRiskApplicationsInWindow.Count();
+
+            if (applicationsInWindowCount > 0 && highRiskApplicationsInWindowCount > 0)
             {
-                var percentHighRisk = (int)Math.Round((double)(100 * highriskApplicationsCount) / applicationsCount);
+                var percentHighRisk = (int)Math.Round((double)(100 * highRiskApplicationsInWindowCount) / applicationsInWindowCount);
 
                 if (percentHighRisk > threshold)
                 {
-                    var eventDescription = $"Total application count: {applicationsCount}, high risk application count {highriskApplications.Count}, {percentHighRisk}% of {threshold}% threshold";
-                    events.Add(new EventModel { event_name = "INCREASE_HIGH_RISK", event_description = eventDescription, event_datetime = DateTime.Now });
+                    var eventDescription = $"Total application count: {applicationsInWindowCount}, high risk application count {highRiskApplicationsInWindowCount}, {percentHighRisk}% of {threshold}% threshold";
+                    events.Add(new EventModel { event_name = "INCREASE_HIGH_RISK", event_description = eventDescription, event_datetime = endDate });
                 }
             }
 
